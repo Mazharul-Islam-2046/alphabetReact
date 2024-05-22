@@ -4,19 +4,28 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
+
+  // Declared the Array of Alphabets
   const alphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
+
+  // Took useState array to show output from here
   const [output, setOutput] = useState([])
 
 
+  // Onclick Function to save and set Total input array
   const collectAlph = (alphabet) =>{
-    const lastInput = output.pop();
+
+    // Taking this last 2 input to validate 3 continious same alphabate typing
+    const lastInput = output[output.length-1];
     const secondLastInput = output[output.length-2]
 
+
+    // Condition to see if anyone typed same alphabet 3 type so that can replace that with underscore
     if (alphabet === lastInput && alphabet === secondLastInput) {
-      return setOutput([...output.slice(0, -2), "-"])
+      return setOutput([...output.slice(0, -2), "_"])
     } else {
-      output.push(alphabet)
+      setOutput([...output, alphabet])
     }
   } 
 
@@ -34,9 +43,9 @@ function App() {
         }
       </div>
 
-      <div className='py-8 px-4 bg-black text-slate-50 mt-6 w-full mx-5'>
+      <div className='py-8 px-4 text-center bg-black text-slate-50 mt-6 w-full mx-5'>
         {
-          output.join("")
+          output.join("")  //Using Join("") to show in string form
         }
       </div>
     </>
